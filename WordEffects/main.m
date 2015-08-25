@@ -41,6 +41,9 @@ NSString* getInput(NSString* prompt){
     return inputString;
 }
 
+// Respond
+// If the user posts a question or exclamation, display an appropriate response.
+//
 void Respond(NSString *inputString){
     NSString *lastChar = getLastChar(inputString);
     NSLog(@"Last Char: %@", lastChar);
@@ -56,6 +59,9 @@ void Respond(NSString *inputString){
     }
 }
 
+// Numberize
+// Determine if the input is numeric, and print the result of converting
+// it from a string to a number.
 void Numberize(NSString *inputString){
     
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
