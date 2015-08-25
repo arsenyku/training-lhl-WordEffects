@@ -13,7 +13,6 @@ NSString* getLastChar(NSString* inputString){
 }
 
 
-
 NSString* getInput(NSString* prompt){
     // 255 unit long array of characters
     char inputChars[255];
@@ -33,11 +32,26 @@ NSString* getInput(NSString* prompt){
     return inputString;
 }
 
+void showIntroMessage(){
+    NSLog(@"Enter a command, then a string.");
+    NSLog(@"Valid commands are:");
+    NSLog(@"1 - Uppercase");
+    NSLog(@"2 - Lowercase");
+    NSLog(@"3 - Numberize");
+    NSLog(@"4 - Canadianize");
+    NSLog(@"5 - Respond");
+    NSLog(@"6 - De-space");
+    NSLog(@"\nAny other command will exit.");
+
+}
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
 
-        while (YES){
+        showIntroMessage();
         
+        while (YES){
+            
             NSString *numberString = getInput(@"Enter a number: ");
             int commandNumber = 0;
             
@@ -73,8 +87,15 @@ int main(int argc, const char * argv[]) {
                 case 3:
                     // Numberize
 	                {
-    	            	float numericValue = [inputString floatValue];
-                        NSLog(@"The number is %f", numericValue);
+                        
+                        NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+                        NSNumber *convertedNumber = [numberFormatter numberFromString:inputString];
+                        if (convertedNumber == nil){
+                            NSLog(@"The provided input is not a number.");
+                        }else {
+                            NSLog(@"The number is %@", convertedNumber);
+                        }
+                        
                     }
                     break;
                 case 4:
