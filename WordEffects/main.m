@@ -37,8 +37,35 @@ NSString* getInput(NSString* prompt){
     
     // remove newline
     inputString = [inputString substringToIndex:[inputString length] - 1 ];
-
+    
     return inputString;
+}
+
+void Respond(NSString *inputString){
+    NSString *lastChar = getLastChar(inputString);
+    NSLog(@"Last Char: %@", lastChar);
+    
+    if ([lastChar isEqualToString:@"?"]){
+        NSLog(@"I don't know");
+    }
+    else if ([lastChar isEqualToString:@"!"]){
+        NSLog(@"Whoa, calm down!");
+    }
+    else {
+        NSLog(@"...");
+    }
+}
+
+void Numberize(NSString *inputString){
+    
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    NSNumber *convertedNumber = [numberFormatter numberFromString:inputString];
+    if (convertedNumber == nil){
+        NSLog(@"The provided input is not a number.");
+    }else {
+        NSLog(@"The number is %@", convertedNumber);
+    }
+    
 }
 
 // showIntroMessage
@@ -55,12 +82,12 @@ void showIntroMessage(){
     NSLog(@"6 - De-space");
     NSLog(@"");
     NSLog(@"Any other command will exit.");
-
+    
 }
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-
+        
         showIntroMessage();
         
         while (YES){
@@ -99,17 +126,7 @@ int main(int argc, const char * argv[]) {
                     break;
                 case 3:
                     // Numberize
-	                {
-                        
-                        NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
-                        NSNumber *convertedNumber = [numberFormatter numberFromString:inputString];
-                        if (convertedNumber == nil){
-                            NSLog(@"The provided input is not a number.");
-                        }else {
-                            NSLog(@"The number is %@", convertedNumber);
-                        }
-                        
-                    }
+                    Numberize(inputString);
                     break;
                 case 4:
                     // Canadianize
@@ -117,21 +134,8 @@ int main(int argc, const char * argv[]) {
                     break;
                 case 5:
                     // Respond
-	                {
-                        NSString *lastChar = getLastChar(inputString);
-                        NSLog(@"Last Char: %@", lastChar);
-                        
-                        if ([lastChar isEqualToString:@"?"]){
-                        	NSLog(@"I don't know");
-                        }
-                        else if ([lastChar isEqualToString:@"!"]){
-                            NSLog(@"Whoa, calm down!");
-                        }
-						else {
-                            NSLog(@"...");
-                        }
-                	}
-                	break;
+                    Respond(inputString);
+                    break;
                 case 6:
                     // De-space
                     NSLog(@"%@",[inputString stringByReplacingOccurrencesOfString:@" " withString:@"-"]);
