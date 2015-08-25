@@ -8,11 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
+
+// getLastChar
+// Extract the last character of a string.
+//
 NSString* getLastChar(NSString* inputString){
+    if ([inputString length] < 1)
+        return @"";
+    
     return [inputString substringFromIndex:[inputString length] - 1];
 }
 
-
+// getInput
+// Issue a prompt to the user and return the typed input
+//
 NSString* getInput(NSString* prompt){
     // 255 unit long array of characters
     char inputChars[255];
@@ -32,6 +41,9 @@ NSString* getInput(NSString* prompt){
     return inputString;
 }
 
+// showIntroMessage
+// Display a message to tell the user what to do.
+//
 void showIntroMessage(){
     NSLog(@"Enter a command, then a string.");
     NSLog(@"Valid commands are:");
@@ -41,7 +53,8 @@ void showIntroMessage(){
     NSLog(@"4 - Canadianize");
     NSLog(@"5 - Respond");
     NSLog(@"6 - De-space");
-    NSLog(@"\nAny other command will exit.");
+    NSLog(@"");
+    NSLog(@"Any other command will exit.");
 
 }
 
